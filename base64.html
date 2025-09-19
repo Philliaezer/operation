@@ -1,0 +1,138 @@
+<!-- Base64 Encoder/Decoder -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Base64 Encoder/Decoder</title>
+    <style>
+      body {
+        font-family: Verdana, sans-serif;
+        margin: 20px;
+        background-color: #f4f4f4;
+      }
+      textarea {
+        width: 85vw;
+        height: 100px;
+        margin-bottom: 10px;
+        border: 3px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+      }
+      button {
+        margin-right: 10px;
+      }
+      #result {
+        margin-top: 20px;
+        background-color: #f9f9f9;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      #result pre {
+        white-space: pre-wrap;
+        word-wrap: break-word;
+      }
+      #result h3 {
+        margin-top: 0;
+      }
+      #result p {
+        margin: 0;
+      }
+      #result .copy-button {
+        margin-top: 10px;
+      }
+      .copy-button {
+        background-color: #4285f4;
+        border: none;
+        border-radius: 3px;
+        color: #fff;
+        cursor: pointer;
+        font-size: 14px;
+        padding: 10px;
+        width: 100%;
+      }
+      .copy-button:hover {
+        background-color: #357ae8;
+      }
+      .copy-button:active {
+        background-color: #285bac;
+      }
+      .copy-button:focus {
+        outline: none;
+      }  
+      .copy-button:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+      }
+      .copy-button:disabled:hover {
+        background-color: #ccc;
+      }
+      .copy-button:disabled:active {
+        background-color: #ccc;
+      }
+      .copy-button:disabled:focus {
+        outline: none;
+      }
+      .code{
+        border: none;
+        border-radius: 3px;
+        color: #fff;
+        cursor: pointer;
+        font-size: 14px;
+        padding: 10px;
+      }
+      .code:first-of-type{
+        background-color: green;
+      }
+      .code{
+        background-color: blue;
+      }
+    </style>
+    </head>
+    <body>
+      <h2>Base64 Encoder/Decoder</h2>
+      <textarea id="inputText" placeholder="Enter text to encode or decode"></textarea>
+      <button class="code" onclick="encode()">Encode</button>
+      <button class="code" onclick="decode()">Decode</button>
+      <div id="result"></div>
+      <script>
+        function encode() {
+          const inputText = document.getElementById('inputText').value;
+          const encodedText = btoa(inputText);
+          displayResult(encodedText, 'Encoded Text');
+        }
+
+        function escapeHtml(text) {
+  var map = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#039;'
+  };
+  return text.replace(/[&<>"']/g, function(m) { return map[m]; });
+            }
+        
+        function decode() {
+          const inputText = document.getElementById('inputText').value;
+          const decodedText = atob(inputText);
+          displayResult(decodedText, 'Decodeed Text');
+        }
+        function displayResult(text, title) {
+          const resultDiv = document.getElementById('result');
+          resultDiv.innerHTML = `
+            <h3>${title}</h3>
+            <code>${escapeHtml(text)}</code>
+            <button class="copy-button" onclick="copyToClipboard('${text}')">Copy to Clipboard</button>
+          `;
+        }
+        function copyToClipboard(text) {
+          navigator.clipboard.writeText(text).then(() => {
+            alert('Copied to clipboard!');
+          });
+        }
+        </script>
+        </body>
+        </html>
+        
