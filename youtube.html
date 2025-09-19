@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exemplo YouTube Video JS</title>
+  <script type="module" src="https://cdn.jsdelivr.net/npm/youtube-video-element@latest"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    #player {
+      width: 640px;
+      height: 360px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Player YouTube com youtube-video-element</h1>
+
+  <!-- Elemento do player com o ID corrigido -->
+  <youtube-video src="https://www.youtube.com/watch?v=3s4C4VobLok" id="player"></youtube-video>
+
+  <!-- Botão para iniciar o vídeo -->
+  <button id="playBtn">Reproduzir Vídeo</button>
+  <button id="stopBtn" onclick="video.pause()">Desligar Vídeo</button>
+
+  <script>
+    const video = document.getElementById('player');
+    document.getElementById('playBtn').addEventListener('click', () => {
+      video.play();
+    });
+  </script>
+</body>
+
+</html>
