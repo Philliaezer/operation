@@ -1,4 +1,5 @@
 ==== INFORMAÇÕES ====
+Lucas Bussiere de Ribamar Ribeiro - Primeiro-Tenente da Marinha
 Perguntar ao Otávio diferenca fundamental entre o Aplicativo Bradesco e o Bradesco Cartões (Bradesco Cartoes é só para reuniir todos os cartões do titular em um só aplicativo?)
 
 - Conta consolidada - Conta geral do cliente
