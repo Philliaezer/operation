@@ -11,7 +11,7 @@ Serviços digitais:
 
 Internet Banking: Site exclusivo para clientes correntistas, com alguns serviços disponibilizados em qualquer navegador compativel.
 Aplicativo Bradesco Cartões: Tanto para Bradesco Cartões, quanto para clientes Bradescard.
-Aplicativo Bradesco: Exclusivo para clientes Bradesco Cartões, com alguns outros beneficios disponibilizados para esse tipo de modalidade.
+Aplicativo Bradesco: Aplicativo completo e exclusivo para clientes Bradesco Cartões (ou seja, correntistas), com alguns outros beneficios disponibilizados para esse tipo de modalidade.
 
 
 ===== OUTRAS TAREFAS E PROTOCOLOS ====
