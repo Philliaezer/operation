@@ -10,8 +10,8 @@ Perguntar ao Otávio diferenca fundamental entre o Aplicativo Bradesco e o Brade
 Serviços digitais:
 
 Internet Banking: Site exclusivo para clientes correntistas, com alguns serviços disponibilizados em qualquer navegador compativel.
-Aplicativo Bradesco Cartões: Tanto para Bradesco Cartões, quanto para clientes Bradescard.
-Aplicativo Bradesco: Aplicativo completo e exclusivo para clientes Bradesco Cartões (ou seja, correntistas), com alguns outros beneficios disponibilizados para esse tipo de modalidade.
+Aplicativo Bradesco Cartões: Tanto para Bradesco Cartões, quanto para clientes Bradescard, mas ambos tem que ser crédito.
+Aplicativo Bradesco: Aplicativo completo e exclusivo para clientes Bradesco Cartões (ou seja, correntistas, débito), com alguns outros beneficios disponibilizados para esse tipo de modalidade.
 
 
 ===== OUTRAS TAREFAS E PROTOCOLOS ====
