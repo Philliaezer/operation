@@ -1,0 +1,193 @@
+<!-- https://telegra.ph/Chater-09-20 https://stackoverflow.com/questions/40275152/how-to-programmatically-add-views-and-constraints-to-a-constraintlayout -->
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Selects dinâmicos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #cc092f;
+      background: linear-gradient(45deg, #b41a83 0%, #cc092f 49%, #f36279 100%);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    select {
+      margin: 5px;
+      padding: 5px;
+      background-color: #cc092f;
+      background: linear-gradient(45deg, #b41a83 0%, #cc092f 49%, #f36279 100%);
+      color: #000000;
+      border: 1px solid #fff;
+      border-radius: 5px;
+      font-size: 16px;
+      width: 200px;
+    }
+
+    .white {
+        color: #ffffff !important;
+    }
+    
+    .brad-nav {
+      display: flex;
+      margin-bottom: 20px;
+      align-items: center;
+      justify-content: center;
+      height: 80px;
+    }
+    .brad-nav h1 {
+      display: block;
+      margin-left: 10px;
+      font-size: 24px;
+      padding: 0;
+    }
+
+    #select-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .spacer {
+      flex-grow: 1; /* This makes the spacer expand to fill available space */
+    }
+  </style>
+</head>
+
+<body>
+  <div class="brad-nav">
+    <img src="https://assets.bradesco/content/dam/portal-bradesco/assets/classic/home/images/logo-mobile.png" width="189px" height="48px" style="margin-left: -20px;" loading="lazy" alt="Logo Bradesco Mobile. Ele é formado por dois símbolos: Dois retângulos vermelhos na vertical, sendo o esquerdo mais fino e menor que o direito. Acima, uma intersecção de dois arcos arabescos fazendo alusão à uma árvore.">
+    <h1>Tabulator</h1>
+  </div>
+  
+  <h2>Selecione:</h2>
+  <div id="select-container"></div>
+
+  <p><button onclick="carregarTemplater()">Ir para Template</button></p>
+  <p><button onclick="carregarTemplater(true)">Ir para Template 3</button></p>
+
+  <script>
+    const data = {
+      "Informação": {
+        "Midea": {
+          "Primeira Via": "primeira_via",
+          "Segunda Via": {
+            "Puro": "segunda_puro", 
+            "Hibrido": "segunda_hibrido"
+          }
+        },
+        "Toshiba": {
+          "Não tratamos": "erro_leitura"
+        }
+      },
+      "Reclamação": {
+        "Demorou na conclusão do reparo": "reclamacao_bs_demora", 
+        "Defeito intermitente": "reclamacao_bs_intermitente", 
+        "Não cumpriu visita": "reclamacao_bs_sem_visita", 
+        "Conduta inadequada": "reclamacao_bs_inadequada", 
+        "Causou danos ao produto ": "reclamacao_bs_danos", 
+        "Demorou para solicitar peças": "reclamacao_bs_demora", 
+        "Solicitou peça errada ": "reclamacao_bs_peca_errada", 
+        "Erro no diagnóstico": "reclamacao_bs_erro_diagnostico", 
+        "Não conseguiu contato - Rede Blue Service": "reclamacao_bs_sem_contato", 
+        "Análise de sinistro - Severidade Média / Alta": "reclamacao_bs_sinistro", 
+      }
+    };
+
+    const templates = {
+      "reclamacao_bs_demora": "Demorou na conclusão do reparo - 5 D",
+      "reclamacao_bs_intermitente": "Defeito intermitente -5 D",
+      "reclamacao_bs_sem_visita": "Não cumpriu visita - 5 D",
+      "reclamacao_bs_inadequada": "Conduta inadequada - 5 D",
+      "reclamacao_bs_danos": "Causou danos ao produto - 5 D ",
+      "reclamacao_bs_demora": "Demorou para solicitar peças - 5 D",
+      "reclamacao_bs_peca_errada": "Solicitou peça errada - 5 D ",
+      "reclamacao_bs_erro_diagnostico": "Erro no diagnóstico - 5 D",
+      "reclamacao_bs_sem_contato": "Não conseguiu contato - Rede Blue Service - 5 D",
+      "reclamacao_bs_sinistro": "Análise de sinistro - Severidade Média / Alta - 24 haras úteis"
+    }
+    
+    const container = document.getElementById("select-container");
+
+    // Função para criar um select a partir de um objeto/array
+    function createSelect(options, nextCallback) {
+      const select = document.createElement("select");
+
+      const defaultOpt = document.createElement("option");
+      defaultOpt.textContent = "Selecione...";
+      defaultOpt.classList.add("white")
+      defaultOpt.disabled = true;
+      defaultOpt.selected = true;
+      select.appendChild(defaultOpt);
+
+      for (let key in options) {
+        let opt = document.createElement("option");
+        opt.value = key;
+        opt.textContent = key;
+        select.appendChild(opt);
+      }
+
+      select.addEventListener("change", () => {
+        // Remove selects que vierem depois
+        while (select.nextSibling) {
+          container.removeChild(select.nextSibling);
+        }
+
+        const selected = options[select.value];
+
+        if (typeof selected === "object") {
+          if (Array.isArray(selected)) {
+            // Caso seja array -> cria select com os valores
+            const subSelect = document.createElement("select");
+            selected.forEach(v => {
+              let opt = document.createElement("option");
+              opt.value = v;
+              opt.textContent = v;
+              subSelect.appendChild(opt);
+            });
+            container.appendChild(subSelect);
+          } else {
+            // Caso seja outro objeto -> cria novo select recursivo
+            const subSelect = createSelect(selected);
+            container.appendChild(subSelect);
+          }
+        } else if (typeof selected === "string"){
+          // Caso seja número -> cria texto
+          const input = document.createElement("p");
+          input.textContent = templates[selected];
+          container.appendChild(input);
+        }
+        // Se for 0 -> para
+      });
+
+      return select;
+    }
+
+    // Inicializa com o objeto raiz
+    container.appendChild(createSelect(data));
+
+    function carregarTemplater(three=false) {
+        /*let its = google.script.run.withSuccessHandler(function(conteudo) {
+          document.write(conteudo);
+          document.close();
+        });
+        if (three){
+          its.incluirArquivo('template-3');
+        } else {
+          its.incluirArquivo('template');
+        }*/
+      }
+
+      
+  </script>
+</body>
+
+</html>
